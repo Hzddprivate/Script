@@ -1,4 +1,6 @@
-local loader = loadstring
-local url = "https://raw.githubusercontent.com/hermanos-dev/hermanos-hub/refs/heads/main/BlockSpin/blockspin-farm.lua"
-local response = game:HttpGet(url)
-loader(response)()
+getgenv().Mode = "Free" -- Set to "Free" if you don't have a key.
+loadstring(
+    game:HttpGet(
+        "https://api.sasware.dev/script/Bootstrapper.luau"
+    )
+)()
