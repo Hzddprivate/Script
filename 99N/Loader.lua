@@ -1,3 +1,1 @@
-(getgenv()).key = "MARU0RMFMYMFPXOI6YYZUNUM";
-(getgenv()).id = "878872687286571018";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruComkak/main/PCBit.lua"))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/MQPS7/99-Night-in-the-Forset/refs/heads/main/99v3'))()
