@@ -4,7 +4,7 @@ Config = {
         HopWhenIdle = true,
         AutoHop = true,
         AutoHopDelay = 60 * 60,
-        FpsBoost = true
+        FpsBoost = false
     },
     Items = {
 
