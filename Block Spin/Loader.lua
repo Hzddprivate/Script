@@ -1,6 +1,1 @@
-getgenv().Mode = "Free" -- Set to "Free" if you don't have a key.
-loadstring(
-    game:HttpGet(
-        "https://api.sasware.dev/script/Bootstrapper.luau"
-    )
-)()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/hermanos-dev/hermanos-hub/refs/heads/main/BlockSpin/blockspin-farm.lua'))()
