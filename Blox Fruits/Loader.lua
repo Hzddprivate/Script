@@ -9,7 +9,8 @@ Config = {
         HopWhenIdle = true,
         AutoHop = true,
         AutoHopDelay = 60 * 60,
-        FpsBoost = true
+        FpsBoost = true,
+        BlackScreen = true
     },
     Items = {
 
@@ -34,4 +35,4 @@ Config = {
 }
 
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sikmaduck/sikmaduck/refs/heads/main/god"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hhl29042008-ops/script/refs/heads/main/cac"))()
