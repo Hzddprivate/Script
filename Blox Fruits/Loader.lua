@@ -3,36 +3,30 @@ repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 setfpscap(15)
-Config = {
-    Team = "Pirates",
-    Configuration = {
-        HopWhenIdle = true,
-        AutoHop = true,
-        AutoHopDelay = 60 * 60,
-        FpsBoost = true,
-        BlackScreen = true
+getgenv().Mode = "OneClick"
+getgenv().Setting = {
+    ["Team"] = "Pirates", -- Options "Pirates", "Marines"
+    ["FucusOnLevel"] = true,
+    ["Fruits"] = {  -- setting for fruits u want
+        ["Primary"] = { -- if current fruit is not in this list, eat/buy
+            "Dough-Dough",
+            "Dragon-Dragon",
+            "Buddha-Buddha",
+            -- u can configs add mores/remove and must end with , (comma symbol)
+        },
+        ["Normal"] = { -- it just a normal fruit list
+            "Flame-Flame",
+            "Light-Light",
+            "Magma-Magma",
+            -- u can configs add mores/remove and must end with , (comma symbol)
+        }
+        -- run this for get all fruit name `local t={};for _,v in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("GetFruits"))do table.insert(t,v.Name)end;setclipboard(table.concat(t, "\n"))`
     },
-    Items = {
-
-        -- Melees 
-        AutoFullyMelees = true,
-
-        -- Swords 
-        Saber = true,
-        CursedDualKatana = true,
-
-        -- Guns 
-        SoulGuitar = false,
-
-        -- Upgrades 
-
-        RaceV2 = true
-
+    ["Lock Fruits"] = { -- don't use or eat fruits in this list
+        "Yeti-Yeti",
+        "T-Rex-T-Rex"
     },
-    Settings = {
-        StayInSea2UntilHaveDarkFragments = false
-    }
-}
+    ["IdleCheck"] = 300, -- every (x) seconds if not moving rejoin
+};
 
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hhl29042008-ops/script/refs/heads/main/cac"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
