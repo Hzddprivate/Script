@@ -1,5 +1,5 @@
 local Players = game:GetService("Players")
-local Lighting = game:GetService--("Lighting")
+local Lighting = game:GetService("Lighting")
 local TeleportService = game:GetService("TeleportService")
 local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
@@ -176,7 +176,14 @@ if Config.NearbyPlayersHop then
 end
 
 local GameList = {
-    [994732206] = "Blox%20Fruits/Loader.lua",
+    [994732206] = "Blox%20Fruits/Loader.lua",  -- Example Game ID
 }
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(GameList[GameId])))()
+local GameId = game.GameId
+local scriptPath = GameList[GameId]
+
+if scriptPath then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Hzddprivate/Script/main/" .. scriptPath))()
+else
+    warn("[Loader] ❌ GameId not found in GameList: " .. tostring(GameId))
+end
