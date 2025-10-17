@@ -6,7 +6,6 @@ getgenv().Setting = {
         ["Primary"] = { 
             "Dough-Dough",
             "Dragon-Dragon",
-            "Buddha-Buddha",
         },
         ["Normal"] = { 
             "Dark-Dark",
