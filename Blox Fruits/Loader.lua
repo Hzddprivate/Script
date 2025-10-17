@@ -9,6 +9,7 @@ getgenv().Setting = {
         },
         ["Normal"] = { 
             "Dark-Dark",
+            "Buddha-Buddha",
             "Quake-Quake",
             "Magma-Magma",
         }
