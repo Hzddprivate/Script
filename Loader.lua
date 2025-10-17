@@ -3,16 +3,31 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
+local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 local cfg = _G.Config or {}
+
+---------------------------------------------------
+-- 🔁 Auto Rejoin System
+---------------------------------------------------
+local function AutoRejoin()
+	task.wait(5)
+	warn("[AUTO REJOIN] กำลังเข้าซ้ำ...")
+	TeleportService:Teleport(game.PlaceId, LocalPlayer)
+end
+
+TeleportService.TeleportInitFailed:Connect(function(player, result, reason)
+	warn("[TELEPORT FAIL]", result, reason)
+	AutoRejoin()
+end)
 
 ---------------------------------------------------
 -- 🧠 NearbyPlayersHop System
 ---------------------------------------------------
 if cfg.NearbyPlayersHop then
     local NearbyRadius = 50
-    local HopThreshold = 90 -- วินาที
+    local HopThreshold = 90
     local CheckInterval = 1
 
     local previousServers = {}
@@ -48,10 +63,17 @@ if cfg.NearbyPlayersHop then
                         table.remove(previousServers, 1)
                     end
                     warn("[HOP] กำลังย้ายไปเซิร์ฟใหม่...")
-                    TeleportService:TeleportToPlaceInstance(PlaceId, server.id, LocalPlayer)
+                    local ok = pcall(function()
+                        TeleportService:TeleportToPlaceInstance(PlaceId, server.id, LocalPlayer)
+                    end)
+                    if not ok then
+                        AutoRejoin()
+                    end
                     return
                 end
             end
+        else
+            AutoRejoin()
         end
     end
 
@@ -74,6 +96,7 @@ if cfg.FpsBoost then
     settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
     game.Lighting.GlobalShadows = false
     game.Lighting.FogEnd = 9e9
+
     for _, obj in pairs(workspace:GetDescendants()) do
         if obj:IsA("BasePart") then
             obj.Material = Enum.Material.Plastic
@@ -84,16 +107,18 @@ if cfg.FpsBoost then
             obj.Enabled = false
         end
     end
+
     for _, effect in pairs(game.Lighting:GetChildren()) do
         if effect:IsA("BloomEffect") or effect:IsA("ColorCorrectionEffect") or effect:IsA("SunRaysEffect") then
             effect.Enabled = false
         end
     end
-    print("[FPS BOOST] กำลังลดกราฟิกเพื่อเพิ่มความลื่น")
+
+    print("[FPS BOOST] ลดกราฟิกเพื่อเพิ่มความลื่นเรียบร้อย")
 end
 
 ---------------------------------------------------
--- 🕶 Black Screen Mode
+-- 🕶 Black Screen Mode + Keybind Toggle
 ---------------------------------------------------
 if cfg.BlackScreen then
     local gui = Instance.new("ScreenGui")
@@ -107,7 +132,16 @@ if cfg.BlackScreen then
     frame.BorderSizePixel = 0
     frame.Size = UDim2.new(1, 0, 1, 0)
     frame.Parent = gui
-    print("[BLACK SCREEN] หน้าจอดำเพื่อประหยัด CPU/GPU")
+
+    print("[BLACK SCREEN] เปิดโหมดจอดำ (กด RightControl เพื่อสลับ)")
+
+    UserInputService.InputBegan:Connect(function(input, gameProcessed)
+        if gameProcessed then return end
+        if input.KeyCode == Enum.KeyCode.RightControl then
+            frame.Visible = not frame.Visible
+            print("[BLACK SCREEN] สถานะ:", frame.Visible and "เปิดอยู่" or "ปิดอยู่")
+        end
+    end)
 end
 
 ---------------------------------------------------
