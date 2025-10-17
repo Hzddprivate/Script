@@ -10,8 +10,8 @@ getgenv().Setting = {
         ["Normal"] = { 
             "Dark-Dark",
             "Buddha-Buddha",
-            "Quake-Quake",
             "Magma-Magma",
+            "Quake-Quake",
         }
     },
     ["Lock Fruits"] = { -- don't use or eat fruits in this list
