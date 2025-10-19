@@ -148,10 +148,10 @@ end
 -- 🎮 Game Script Loader
 ---------------------------------------------------
 local GameId = game.GameId
+
 local GameList = {
     [994732206] = "Blox%20Fruits/Loader.lua",
+    [6765805766] = "Block%20Spin/Loader.lua",
 }
-local scriptUrl = GameList[GameId]
-if scriptUrl then
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(scriptUrl)))()
-end
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(GameList[GameId])))()
