@@ -154,4 +154,25 @@ local GameList = {
     [6765805766] = "Block%20Spin/Loader.lua",
 }
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(GameList[GameId])))()
+local scriptPath = GameList[GameId]
+if scriptPath then
+    warn(("[LOADER] กำลังโหลดสคริปต์สำหรับ Game ID: %d"):format(GameId))
+    local success, result = pcall(function()
+        return game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(scriptPath))
+    end)
+
+    if success and result then
+        local ok, err = pcall(function()
+            loadstring(result)()
+        end)
+        if ok then
+            warn("[LOADER] โหลดสำเร็จ ✅")
+        else
+            warn("[LOADER ERROR] โหลดสคริปต์ไม่สำเร็จ:", err)
+        end
+    else
+        warn("[LOADER ERROR] ไม่สามารถดาวน์โหลดไฟล์จาก GitHub:", result)
+    end
+else
+    warn(("[LOADER] ไม่มีสคริปต์ที่จับคู่กับ Game ID %d"):format(GameId))
+end
