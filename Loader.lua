@@ -117,36 +117,6 @@ if cfg.FpsBoost then
     print("[FPS BOOST] ลดกราฟิกเพื่อเพิ่มความลื่นเรียบร้อย")
 end
 
----------------------------------------------------
--- 🕶 Black Screen Mode + Keybind Toggle
----------------------------------------------------
-if cfg.BlackScreen then
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "BlackScreen"
-    gui.IgnoreGuiInset = true
-    gui.ResetOnSpawn = false
-    gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
-
-    local frame = Instance.new("Frame")
-    frame.BackgroundColor3 = Color3.new(0, 0, 0)
-    frame.BorderSizePixel = 0
-    frame.Size = UDim2.new(1, 0, 1, 0)
-    frame.Parent = gui
-
-    print("[BLACK SCREEN] เปิดโหมดจอดำ (กด RightControl เพื่อสลับ)")
-
-    UserInputService.InputBegan:Connect(function(input, gameProcessed)
-        if gameProcessed then return end
-        if input.KeyCode == Enum.KeyCode.RightControl then
-            frame.Visible = not frame.Visible
-            print("[BLACK SCREEN] สถานะ:", frame.Visible and "เปิดอยู่" or "ปิดอยู่")
-        end
-    end)
-end
-
----------------------------------------------------
--- 🎮 Game Script Loader
----------------------------------------------------
 local GameId = game.GameId
 
 local GameList = {
