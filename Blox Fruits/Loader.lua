@@ -8,10 +8,14 @@ getgenv().Setting = {
     ["FucusOnLevel"] = true,
     ["Fruits"] = {  
         ["Primary"] = { 
+            "Dough-Dough",
+            "Buddha-Buddha",
             "Dragon-Dragon",
         },
         ["Normal"] = { 
-            "Dragon-Dragon",
+            "Dark-Dark",
+            "Magma-Magma",
+            "Quake-Quake",
         }
     },
     ["Lock Fruits"] = { -- don't use or eat fruits in this list
