@@ -19,7 +19,7 @@ _G.OneClickSettings = {
     },
     ["MainFruits"] = {
         "Dough-Dough",
-        ""
+        "Buddha-Buddha"
     },
     ["RegularFruits"] = {
         "Magmag-Magma",
