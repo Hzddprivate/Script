@@ -2,35 +2,31 @@ repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-getgenv().Mode = "OneClick"
-getgenv().Setting = {
-    ["Team"] = "Pirates",
-    ["FucusOnLevel"] = true,
-    ["Fruits"] = {  
-        ["Primary"] = { 
-            "Dough-Dough",
-            "Buddha-Buddha",
-            "Dragon-Dragon",
-        },
-        ["Normal"] = { 
-            "Dark-Dark",
-            "Magma-Magma",
-            "Quake-Quake",
-        }
-    },
-    ["Lock Fruits"] = { -- don't use or eat fruits in this list
-        "Yeti-Yeti",
-        "T-Rex-T-Rex",
-        "Kitsune-Kitsune",
-        "Leopard-Leopard",
-        "Mammoth-Mammoth",
+_G.Team = "Pirate" -- Marine / Pirate
+getgenv().Script_Mode = "Kaitun_Script"
+_G.OneClickSettings = {
+    ["LockFruits"] = {
         "Dough-Dough",
+        "Dragon-Dragon",
+        "Yeti-Yeti",
+        "Kitsune-Kitsune",
         "Gas-Gas",
         "Spirit-Spirit",
-        "Gravity-Gravity",
-        "Venom-Venom"
+        "Leopard-Leopard",
+        "Venom-Venom",
+        "T-Rex-T-Rex",
+        "Mammoth-Mammoth"
     },
-    ["IdleCheck"] = 150, -- every (x) seconds if not moving rejoin
-};
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
+    ["MainFruits"] = {
+        "Dough-Dough",
+        ""
+    },
+    ["RegularFruits"] = {
+        "Magmag-Magma",
+        "Dark-Dark"
+    },
+    ["FragmentsCap"] = 50000
+}
+(getgenv()).key = "MARU0RMFMYMFPXOI6YYZUNUM";
+(getgenv()).id = "878872687286571018";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruComkak/main/PCBit.lua"))()
