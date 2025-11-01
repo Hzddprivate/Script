@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Key = "24e26bff48554cdacae1f244"
-    getgenv().SettingFarm ={
+    getgenv().SettingFarm = {
         ["Hide UI"] = false,
         ["Reset Teleport"] = {
             ["Enabled"] = true,
