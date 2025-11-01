@@ -1,108 +1,80 @@
-repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-_G.Team = "Pirate" -- Marine / Pirate
-getgenv().Script_Mode = "Kaitun_Script"
-_G.MainSettings = {
-    ["EnabledHOP"] = true,
-    ['FPSBOOST'] = true,
-    ["FPSLOCKAMOUNT"] = 15,
-    ['WhiteScreen'] = true,
-    ['CloseUI'] = true,
-    ["NotifycationExPRemove"] = true,
-    ['AFKCheck'] = 150,
-    ["LockFragments"] = 35000,
-    ["LockFruitsRaid"] = {
-        [1] = "Dough-Dough",
-        [2] = "Dragon-Dragon", 
-        [3] = "Yeti-Yeti",
-        [4] = "Kitsune-Kitsune",
-        [5] = "Gas-Gas",
-        [6] = "Spirit-Spirit",
-        [7] = "Tiger-Tiger",
-        [8] = "Venom-Venom",
-        [9] = "Leopard-Leopard",
-        [10] = "Mammoth-Mammoth",
-        [11] = "T-Rex-T-Rex",
-    }
-}
-_G.SharkAnchor_Settings = {
-    ["Enabled_Farm"] = false,
-    ['FarmAfterMoney'] = 2500000
-}
-_G.Quests_Settings = {        
-    ['Rainbow_Haki'] = true,
-    ["MusketeerHat"] = true,
-    ["PullLever"] = true,
-    ['DoughQuests_Mirror'] = {
-        ['Enabled'] = true,
-        ['UseFruits'] = true
-    }        
-}
-_G.Races_Settings = {
-    ['Race'] = {
-        ['EnabledEvo'] = true,
-        ["v2"] = true,
-        ["v3"] = true,
-        ["Races_Lock"] = {
-            ["Races"] = {
-                ["Mink"] = true,
-                ["Human"] = true,
-                ["Fishman"] = true
+getgenv().Key = "24e26bff48554cdacae1f244"
+    getgenv().SettingFarm ={
+        ["Hide UI"] = false,
+        ["Reset Teleport"] = {
+            ["Enabled"] = true,
+            ["Delay Reset"] = 3,
+            ["Item Dont Reset"] = {
+                ["Fruit"] = {
+                    ["Enabled"] = true,
+                    ["All Fruit"] = true, 
+                    ["Select Fruit"] = {
+                        ["Enabled"] = false,
+                        ["Fruit"] = {},
+                    },
+                },
             },
-            ["RerollsWhenFragments"] = 20000
+        },
+        ["White Screen"] = true,
+        ["Lock Fps"] = {
+            ["Enabled"] = true,
+            ["FPS"] = 15,
+        },
+        ["Get Items"] = {
+            ["Saber"] = true,
+            ["Godhuman"] =  true,
+            ["Skull Guitar"] = true,
+            ["Mirror Fractal"] = true,
+            ["Cursed Dual Katana"] = true,
+            ["Upgrade Race V2-V3"] = true,
+            ["Auto Pull Lever"] = true,
+            ["Shark Anchor"] = false, --- if have cdk,sg,godhuman
+        },
+        ["Get Rare Items"] = {
+            ["Rengoku"] = true,
+            ["Dragon Trident"] = true, 
+            ["Pole (1st Form)"] = true,
+            ["Gravity Blade"]  = true,
+        },
+        ["Farm Fragments"] = {
+            ["Enabled"]  = true,
+            ["Fragment"] = 50000,
+        },
+        ["Auto Chat"] = {
+            ["Enabled"] = false,
+            ["Text"] = "",
+        },
+        ["Auto Summon Rip Indra"] = true, --- auto buy haki and craft haki legendary 
+        ["Select Hop"] = { -- 70% will have it
+            ["Hop Server If Have Player Near"] = false, 
+            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = true, 
+            ["Hop Find Dough King Get Mirror Fractal"] = true,
+            ["Hop Find Raids Castle [CDK]"] = true,
+            ["Hop Find Cake Queen [CDK]"] = true,
+            ["Hop Find Soul Reaper [CDK]"] = true,
+            ["Hop Find Darkbeard [SG]"] = true,
+            ["Hop Find Mirage [ Pull Lever ]"] = false,
+        },
+        ["Farm Mastery"] = {
+            ["Melee"] = true,
+            ["Sword"] = true,
+        },
+        ["Buy Haki"] = {
+            ["Enhancement"] = true,
+            ["Skyjump"] = true,
+            ["Flash Step"] = true,
+            ["Observation"] = true,
+        },
+        ["Sniper Fruit Shop"] = {
+            ["Enabled"] = true, -- Auto Buy Fruit in Shop Mirage and Normal
+            ["Fruit"] = {"Tiger-Tiger","Dough-Dough","Spirit-Spirit","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas","Buddha-Buddha"},
+        },
+        ["Lock Fruit"] = {"Tiger-Tiger","Dough-Dough","Spirit-Spirit","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
+        ["Webhook"] = {
+            ["Enabled"] = true,
+            ["WebhookUrl"] = "https://discord.com/api/webhooks/1420746655820681216/zV6UA7Gcddtr2k4Pycku89W571UNs5FY64hmtIk4mTGkkPw_yRUnCSU5FydVfCco_5BY",
         }
     }
-}
-_G.Fruits_Settings = {
-    ['Main_Fruits'] = {'Dough-Dough', 'Buddha-Buddha'},
-    ['Select_Fruits'] = {"Quake-Quake", "Light-Light", "Dark-Dark", "Magma-Magma"}
-}
-_G.Settings_Melee = {
-    ['Superhuman'] = true,
-    ['DeathStep'] = true,
-    ['SharkmanKarate'] = true,
-    ['ElectricClaw'] = true,
-    ['DragonTalon'] = true,
-    ['Godhuman'] = true
-}
-_G.SwordSettings = {
-    ['Saber'] = true,
-    ["Pole"] = true,
-    ['MidnightBlade'] = false,
-    ['Shisui'] = true,
-    ['Saddi'] = false,
-    ['Wando'] = false,
-    ['Yama'] = true,
-    ['Rengoku'] = true,
-    ['Canvander'] = true,
-    ['BuddySword'] = true,
-    ['TwinHooks'] = true,
-    ['HallowScryte'] = true,
-    ['TrueTripleKatana'] = false,
-    ['CursedDualKatana'] = true
-}
-_G.GunSettings = {
-    ['Kabucha'] = true,
-    ['SerpentBow'] = true,
-    ['SoulGuitar'] = false
-}
-_G.FarmMastery_Settings = {
-    ['Melee'] = true,
-    ['Sword'] = true,
-    ['DevilFruits'] = true,
-    ['Select_Swords'] = {
-        ["AutoSettings"] = true,
-        ["ManualSettings"] = {
-            "Saber",
-            "Buddy Sword"
-        }
-    }
-}
-_G.Hop_Settings = {
-    ["Find Tushita"] = false
-}
-(getgenv()).key = "MARU0RMFMYMFPXOI6YYZUNUM";
-(getgenv()).id = "878872687286571018";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruComkak/main/PCBit.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
