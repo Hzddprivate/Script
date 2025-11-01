@@ -101,7 +101,7 @@ _G.FarmMastery_Settings = {
     }
 }
 _G.Hop_Settings = {
-    ["Find Tushita"] = true
+    ["Find Tushita"] = false
 }
 (getgenv()).key = "MARU0RMFMYMFPXOI6YYZUNUM";
 (getgenv()).id = "878872687286571018";
