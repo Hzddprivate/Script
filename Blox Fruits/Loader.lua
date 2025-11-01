@@ -1,5 +1,4 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 getgenv().Key = "24e26bff48554cdacae1f244"
     getgenv().SettingFarm ={
         ["Hide UI"] = false,
