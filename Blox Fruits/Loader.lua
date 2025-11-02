@@ -2,7 +2,7 @@ repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Key = "24e26bff48554cdacae1f244"
     getgenv().SettingFarm ={
         ["Multiple Attack"] = true, --// this is fast attack added by me
-        ["Hide UI"] = false,
+        ["Hide UI"] = true,
         ["Reset Teleport"] = {
             ["Enabled"] = true,
             ["Delay Reset"] = 0.5,
