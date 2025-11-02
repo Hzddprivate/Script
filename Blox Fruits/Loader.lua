@@ -72,7 +72,7 @@ getgenv().Key = "24e26bff48554cdacae1f244"
         },
         ["Lock Fruit"] = {"Tiger-Tiger","Dough-Dough","Spirit-Spirit","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
         ["Webhook"] = {
-            ["Enabled"] = true,
+            ["Enabled"] = false,
             ["WebhookUrl"] = "https://discord.com/api/webhooks/1420746655820681216/zV6UA7Gcddtr2k4Pycku89W571UNs5FY64hmtIk4mTGkkPw_yRUnCSU5FydVfCco_5BY",
         }
     }
