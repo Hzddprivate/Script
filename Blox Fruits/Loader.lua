@@ -77,3 +77,17 @@ getgenv().Key = "24e26bff48554cdacae1f244"
         }
     }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
+
+repeat task.wait() until game:IsLoaded()
+local plr = game.Players.LocalPlayer
+
+local function check()
+    local c = plr.Character or plr.CharacterAdded:Wait()
+    if not c:FindFirstChild("HasBuso") and not c:FindFirstChild("Buso") then
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Buso")
+    end
+end
+
+plr.CharacterAdded:Connect(function() task.wait(2) check() end)
+task.spawn(function() while task.wait(5) do pcall(check) end end)
+check()
