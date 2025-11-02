@@ -1,10 +1,10 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Key = "24e26bff48554cdacae1f244"
-    getgenv().SettingFarm = {
+    getgenv().SettingFarm ={
         ["Hide UI"] = false,
         ["Reset Teleport"] = {
             ["Enabled"] = true,
-            ["Delay Reset"] = 3,
+            ["Delay Reset"] = 0.5,
             ["Item Dont Reset"] = {
                 ["Fruit"] = {
                     ["Enabled"] = true,
@@ -16,10 +16,10 @@ getgenv().Key = "24e26bff48554cdacae1f244"
                 },
             },
         },
-        ["White Screen"] = true,
+        ["White Screen"] = false,
         ["Lock Fps"] = {
-            ["Enabled"] = true,
-            ["FPS"] = 15,
+            ["Enabled"] = false,
+            ["FPS"] = 20,
         },
         ["Get Items"] = {
             ["Saber"] = true,
@@ -28,7 +28,7 @@ getgenv().Key = "24e26bff48554cdacae1f244"
             ["Mirror Fractal"] = true,
             ["Cursed Dual Katana"] = true,
             ["Upgrade Race V2-V3"] = true,
-            ["Auto Pull Lever"] = true,
+            ["Auto Pull Lever"] = false,
             ["Shark Anchor"] = false, --- if have cdk,sg,godhuman
         },
         ["Get Rare Items"] = {
@@ -53,7 +53,7 @@ getgenv().Key = "24e26bff48554cdacae1f244"
             ["Hop Find Raids Castle [CDK]"] = true,
             ["Hop Find Cake Queen [CDK]"] = true,
             ["Hop Find Soul Reaper [CDK]"] = true,
-            ["Hop Find Darkbeard [SG]"] = true,
+            ["Hop Find Darkbeard [SG]"] = false,
             ["Hop Find Mirage [ Pull Lever ]"] = false,
         },
         ["Farm Mastery"] = {
@@ -68,12 +68,12 @@ getgenv().Key = "24e26bff48554cdacae1f244"
         },
         ["Sniper Fruit Shop"] = {
             ["Enabled"] = true, -- Auto Buy Fruit in Shop Mirage and Normal
-            ["Fruit"] = {"Tiger-Tiger","Dough-Dough","Spirit-Spirit","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas","Buddha-Buddha"},
+            ["Fruit"] = {"Tiger-Tiger","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas","Dough-Dough","Buddha-Buddha","Spirit-Spirit"},
         },
-        ["Lock Fruit"] = {"Tiger-Tiger","Dough-Dough","Spirit-Spirit","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
+        ["Lock Fruit"] = {"Tiger-Tiger","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas","Dough-Dough","Buddha-Buddha","Spirit-Spirit"},
         ["Webhook"] = {
             ["Enabled"] = false,
-            ["WebhookUrl"] = "https://discord.com/api/webhooks/1420746655820681216/zV6UA7Gcddtr2k4Pycku89W571UNs5FY64hmtIk4mTGkkPw_yRUnCSU5FydVfCco_5BY",
+            ["WebhookUrl"] = "",
         }
     }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
