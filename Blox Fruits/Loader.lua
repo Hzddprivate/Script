@@ -52,14 +52,14 @@ getgenv().SettingFarm = {
         ["Hop Server If Have Player Near"] = false,
         ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = true,
         ["Hop Find Dough King Get Mirror Fractal"] = true,
-        ["Hop Find Raids Castle [CDK]"] = false,
+        ["Hop Find Raids Castle [CDK]"] = true,
         ["Hop Find Cake Queen [CDK]"] = false,
         ["Hop Find Soul Reaper [CDK]"] = true,
         ["Hop Find Darkbeard [SG]"] = false,
         ["Hop Find Mirage [ Pull Lever ]"] = false,
     },
     ["Farm Mastery"] = {
-        ["Melee"] = false,
+        ["Melee"] = true,
         ["Sword"] = true,
     },
     ["Buy Haki"] = {
