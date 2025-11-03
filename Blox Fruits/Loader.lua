@@ -29,7 +29,7 @@ getgenv().SettingFarm = {
         ["Skull Guitar"] = false,
         ["Mirror Fractal"] = true,
         ["Cursed Dual Katana"] = true,
-        ["Upgrade Race V2-V3"] = true,
+        ["Upgrade Race V2-V3"] = false,
         ["Auto Pull Lever"] = true,
         ["Shark Anchor"] = false,
     },
