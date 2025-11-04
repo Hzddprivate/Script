@@ -60,7 +60,7 @@ getgenv().SettingFarm = {
     },
     ["Farm Mastery"] = {
         ["Melee"] = true,
-        ["Sword"] = true,
+        ["Sword"] = false,
     },
     ["Buy Haki"] = {
         ["Enhancement"] = true,
