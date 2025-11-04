@@ -24,7 +24,7 @@ local GameList = {
     [79546208627805] = {"99N/Loader.lua", "99N/Horst.lua"},
 }
 
-local BASE = "https://raw.githubusercontent.com/zxcxzc/Script/main/%s"
+local BASE = "https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"
 local scripts = GameList[GameId]
 
 if scripts then
