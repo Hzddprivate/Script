@@ -8,18 +8,4 @@ local GameList = {
     [79546208627805] = {"99N/Loader.lua", "99N/Horst.lua"},
 }
 
-local BASE = "https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"
-local scripts = GameList[GameId]
-
-if scripts then
-    for _, path in ipairs(scripts) do
-        local ok, err = pcall(function()
-            loadstring(game:HttpGet(BASE:format(path)))()
-        end)
-        if not ok then
-            warn(("Failed to run %s: %s"):format(path, tostring(err)))
-        end
-    end
-else
-    warn("No scripts mapped for GameId: " .. tostring(GameId))
-end
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Hzddprivate/Script/main/%s"):format(GameList[GameId])))()
