@@ -22,7 +22,6 @@ _G.MainSettings = {
         [6] = "Dough-Dough",
         [7] = "Buddha-Buddha",
         [8] = "Spirit-Spirit",
-    },
     }
 }
 _G.SharkAnchor_Settings = {
