@@ -142,10 +142,7 @@ getgenv().Setting = {
         "Kitsune-Kitsune",
         "Dragon-Dragon",
         "Yeti-Yeti",
-        "Gas-Gas",
-        "Dough-Dough",
-        "Buddha-Buddha",
-        "Spirit-Spirit"
+        "Dough-Dough"
     },
     ["IdleCheck"] = 150, -- every (x) seconds if not moving rejoin
 };
