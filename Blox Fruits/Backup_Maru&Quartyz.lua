@@ -127,6 +127,7 @@ getgenv().Setting = {
             "Buddha-Buddha",
             "Spirit-Spirit",
             "Buddha-Buddha",
+            "T-rex-T-rex",
         },
         ["Normal"] = { -- it just a normal fruit list
             "Dark-Dark",
