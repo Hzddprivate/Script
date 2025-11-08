@@ -157,6 +157,7 @@ getgenv().Key = "24e26bff48554cdacae1f244"
 getgenv().SettingFarm = {
     ["Multiple Attack"] = true,
     ["Auto Buso"] = true,
+    ["Auto Active Race V3"] = true,
     ["Hide UI"] = false,
     ["Reset Teleport"] = {
         ["Enabled"] = false,
