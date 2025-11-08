@@ -143,23 +143,127 @@ if Setting["Multiple Attack"] then
     end)
 end
 
--- 🧬 AUTO ACTIVATE RACE V3
-if Setting["Auto Active Race V3"] then
+if Setting and Setting["Auto Active Race V3"] then
+    --// Services
+    local Players = game:GetService("Players")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+    --// Locals
+    local player  = Players.LocalPlayer
+    local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+    local CommE   = Remotes:WaitForChild("CommE")
+
+    --// Tunables (ปรับได้ตามเครื่อง/เซิร์ฟเวอร์)
+    local BASE_TICK       = 0.75   -- จังหวะเช็กปกติ (ยิ่งมากยิ่งเบา)
+    local MAX_TICK        = 2.00   -- เพดานการนอนสูงสุด (เวลาคูลดาวน์ยาว)
+    local FIRE_THROTTLE   = 1.25   -- เวลาขั้นต่ำระหว่างการยิงซ้ำ (กันสแปม)
+    local SAFETY_COOLDOWN = 2.00   -- กันช้ำหลังยิง (เผื่อ latency/UI)
+
+    --// State
+    local lastFire, manualCooldownUntil = 0, 0
+    local currentChar = player.Character
+
+    -- อัปเดต currentChar และรีเซ็ตสถานะเมื่อรีส폰
+    player.CharacterAdded:Connect(function(c)
+        currentChar = c
+        lastFire, manualCooldownUntil = 0, 0
+    end)
+
+    -- ชื่อแอททริบิวต์ที่จะอ่าน (ULTRA-STRICT: Attributes only)
+    local ACTIVE_ATTR_NAMES    = {"Active","Activated","IsActive","Running"}
+    local CD_LEFT_ATTR_NAMES   = {"Cooldown","CoolDown","CD","RaceCooldown","RaceCD"}       -- จำนวนวิที่เหลือ
+    local CD_UNTIL_ATTR_NAMES  = {"CooldownUntil","NextUseAt","NextUse","ReadyAt"}          -- เวลาเป้าหมาย (timestamp)
+
+    --// Helpers (ไม่แตะ BoolValue/NumberValue; อ่านเฉพาะ Attribute)
+    local function getHumanoid(c)
+        return c and c:FindFirstChildOfClass("Humanoid")
+    end
+
+    local function isAlive(c)
+        local h = getHumanoid(c)
+        return h and h.Health > 0
+    end
+
+    local function getRaceObj(c)
+        return c and c:FindFirstChild("RaceAbility")
+    end
+
+    local function isRaceActiveAttr(r)
+        for _, n in ipairs(ACTIVE_ATTR_NAMES) do
+            local ok, v = pcall(function() return r:GetAttribute(n) end)
+            if ok and type(v) == "boolean" then
+                return v
+            end
+        end
+        return false
+    end
+
+    local function cooldownLeftAttr(r)
+        -- คืนค่า "วินาทีที่เหลือ" ถ้าอ่านได้, ไม่งั้นคืน nil
+        local now = os.clock()
+        for _, n in ipairs(CD_LEFT_ATTR_NAMES) do
+            local ok, v = pcall(function() return r:GetAttribute(n) end)
+            if ok and type(v) == "number" and v > 0 then
+                return v
+            end
+        end
+        for _, n in ipairs(CD_UNTIL_ATTR_NAMES) do
+            local ok, v = pcall(function() return r:GetAttribute(n) end)
+            if ok and type(v) == "number" and v > now then
+                return v - now
+            end
+        end
+        -- กันช้ำฝั่งสคริปต์เอง
+        if manualCooldownUntil > now then
+            return manualCooldownUntil - now
+        end
+        return nil
+    end
+
+    local function canActivate(c, r)
+        if not isAlive(c) then return false end
+        if not r then return false end                 -- STRICT: ต้องมี RaceAbility
+        if isRaceActiveAttr(r) then return false end   -- STRICT: อ่านเฉพาะ Attribute
+        local cdLeft = cooldownLeftAttr(r)
+        if cdLeft and cdLeft > 0 then return false end -- STRICT: อ่านเฉพาะ Attribute
+        if (os.clock() - lastFire) < FIRE_THROTTLE then return false end
+        return true
+    end
+
+    local function activate()
+        lastFire = os.clock()
+        CommE:FireServer("ActivateAbility")
+        manualCooldownUntil = os.clock() + SAFETY_COOLDOWN
+    end
+
+    --// Main loop: ULTRA-LIGHT (Adaptive Sleep)
     task.spawn(function()
-        local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommE")
-        local lastUsed = 0
-        while task.wait(1) do
+        while true do
+            local sleepFor = BASE_TICK  -- ค่าเริ่มต้น: เบาเป็นหลัก
             pcall(function()
-                local c = Player.Character or Player.CharacterAdded:Wait()
-                if c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 then
-                    if not c:FindFirstChild("RaceTransformed") and not c:FindFirstChild("Hyper") then
-                        if tick() - lastUsed >= 30 then -- cooldown 30 วิ
-                            Remote:FireServer("ActivateAbility")
-                            lastUsed = tick()
-                        end
+                local c = currentChar or player.Character
+                local r = getRaceObj(c)
+
+                if c and r then
+                    -- ถ้ามีข้อมูลคูลดาวน์ ให้ "นอนตามเวลาที่เหลือ" (แต่ไม่เกิน MAX_TICK)
+                    local cdLeft = cooldownLeftAttr(r)
+                    if cdLeft and cdLeft > 0 then
+                        sleepFor = math.clamp(cdLeft, BASE_TICK, MAX_TICK)
+                    elseif canActivate(c, r) then
+                        activate()
+                        -- หลังยิงเสร็จ นอนยาว ๆ เพื่อลดภาระ (กันช้ำ)
+                        sleepFor = SAFETY_COOLDOWN
+                    else
+                        -- กรณีเงื่อนไขยังไม่พร้อม แต่ไม่มีคูลดาวน์ชัดเจน
+                        sleepFor = BASE_TICK
                     end
+                else
+                    -- ยังไม่มีตัวละครหรือยังไม่เจอ RaceAbility: ผ่อนเบา ๆ
+                    sleepFor = math.max(1.0, BASE_TICK)
                 end
             end)
+            task.wait(sleepFor)
         end
     end)
 end
+
