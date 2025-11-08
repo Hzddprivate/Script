@@ -142,3 +142,24 @@ if Setting["Multiple Attack"] then
         end
     end)
 end
+
+-- 🧬 AUTO ACTIVATE RACE V3
+if Setting["Auto Active Race V3"] then
+    task.spawn(function()
+        local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommE")
+        local lastUsed = 0
+        while task.wait(1) do
+            pcall(function()
+                local c = Player.Character or Player.CharacterAdded:Wait()
+                if c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 then
+                    if not c:FindFirstChild("RaceTransformed") and not c:FindFirstChild("Hyper") then
+                        if tick() - lastUsed >= 30 then -- cooldown 30 วิ
+                            Remote:FireServer("ActivateAbility")
+                            lastUsed = tick()
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end
